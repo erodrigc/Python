@@ -31,3 +31,28 @@ Tener en cuenta que Docker solo está disponible para Windows 10 64bit: Pro, Ent
 ### MacOS
 [Docker Desktop para Mac](https://docs.docker.com/docker-for-mac/install/)
 
+### Verificar la versión de Docker
+```
+$ docker –version 
+```
+## Creación imagen
+```
+$ docker build -t nombreApp .
+$ docker image ls
+$ docker run -p 3000:3000 nameApp
+```
+
+## Compartir imagen
+```
+$ docker login
+$ docker tag <image> <username/repository:tag>
+$ docker image ls
+$ docker push <username/repository:tag>
+$ docker run -p 3000:3000 <username/repository:tag>
+```
+
+## Desplegar aplicación
+```
+$ docker-compose build
+$ docker-compose up
+```
