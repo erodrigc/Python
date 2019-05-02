@@ -1,10 +1,21 @@
 version: "3"
 services:
+  nginx:
+    container_name: nginx-server
+    image: nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - web
   web:
     # replace username/repo:tag with your name and image details
     image: cwhiter/telematica:v1
     restart: always
     build: .
     ports:
-      - "4000:80"
+      - "3000:3000"
     
