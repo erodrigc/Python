@@ -154,4 +154,33 @@ CMD python app.py
 ```
 Docker cuenta con diferentes instrucciones para componer el Dockerfile: ADD, COPY, ENV, EXPOSE, FROM, LABEL, STOPSIGNAL, USER, VOLUME y WORKDIR.
 
-#### 
+#### 7.	Correr el comando build para crear la imagen.
+```
+$ docker build -t nameApp .
+```
+#### 8.	Verificar si la imagen fue creada.
+```
+$ docker image ls
+```
+Este comando debería mostrar el siguiente resultado.
+![](./docs/contenedores8.png)
+
+#### 9.	Correr la app.
+```
+$ docker run -p 3000:3000 nameApp
+```
+Se puede acceder a la app por medio de http://localhost:3000,  debido a que el mensaje que imprime la app viene dentro del contenedor y este no mapea el puerto 3000 con el 3000. 
+También se puede correr: 
+```
+$ curl http://localhost:3000
+```
+y se obtiene lo siguiente. 
+Para correr la app en detached mode, usar el siguiente comando.
+
+```
+$ docker run -d -p 3000:3000 nameApp
+```
+#### 10.	Si se desea parar el contenedor.
+```
+$ docker container stop <id>
+```
