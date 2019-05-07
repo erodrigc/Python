@@ -130,7 +130,7 @@ Deberían ver algo similar a la siguiente imagen.
 #### 5.	En este punto se tiene una aplicación funcional sin Docker.
 
 #### 6.	Crear el Dockerfile con el siguiente contenido, este archivo sirve para crear una imagen de la aplicación. 
-```Docker
+```Dockerfile
 # Build an image starting with the Python 2.7
 FROM python:2.7-slim
 
