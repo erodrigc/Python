@@ -68,6 +68,17 @@ Este comando debería arrojar el siguiente resultado.
 $ docker image ls
 ```
 
+### 6. Listar los contenedores existentes corriendo actualmente.
+```
+$ docker container ls
+```
+Listar todos los contenedores existentes, incluso los que no están corriendo. 
+```
+$ docker container ls –all
+```
+
+### Cheat Sheet
+![](./docs/cheatsheetinstalacion.png)
 
 
 
