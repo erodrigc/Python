@@ -110,6 +110,21 @@ def hello():
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=3000)
 ```
+#### 2.	Crear el archivo requirements.txt con el siguiente contenido.
+```
+Flask
+Redis
+```
+#### 3.	Instalar Flask y Redis.
+```
+$ pip install -r requirements.txt
+```
+#### 4.	Correr la aplicación.
+```
+$ python app.py
+```
+Ir al browser y buscar http://0.0.0.0:3000/ .
+
 
 
 
