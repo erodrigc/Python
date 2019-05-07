@@ -86,7 +86,7 @@ $ docker container ls –all
 * Un **Dockerfile** define lo que sucede en el ambiente dentro de su contenedor. 
 
 #### 1. Crear una aplicación en python (app.py) con el siguiente contenido. 
-```
+```python
 from flask import Flask
 from redis import Redis, RedisError
 import os
