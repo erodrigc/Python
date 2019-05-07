@@ -13,7 +13,7 @@
 
 * Un contenedor se lanza corriendo una **imagen** (paquete ejecutable que incluye todo lo necesario para ejecutar una aplicación).
 
-* Un contenedor es una instancia de tiempo de ejecución de una imagen.
+* Un **contenedor** es una instancia de tiempo de ejecución de una imagen.
 
 
 ## Instalación
@@ -49,24 +49,4 @@ Tener en cuenta que Docker solo está disponible para Windows 10 64bit: Pro, Ent
 ```
 $ docker –version 
 ```
-## Creación imagen
-```
-$ docker build -t nombreApp .
-$ docker image ls
-$ docker run -p 3000:3000 nameApp
-```
 
-## Compartir imagen
-```
-$ docker login
-$ docker tag <image> <username/repository:tag>
-$ docker image ls
-$ docker push <username/repository:tag>
-$ docker run -p 3000:3000 <username/repository:tag>
-```
-
-## Desplegar aplicación
-```
-$ docker-compose build
-$ docker-compose up
-```
