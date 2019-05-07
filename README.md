@@ -62,3 +62,13 @@ $ docker run hello-world
 ```
 Este comando debería arrojar el siguiente resultado.
 ![](./docs/instalacion4.png)
+
+### 5. Listar las imágenes descargadas en el computador.
+```
+$ docker image ls
+```
+
+
+
+
+
