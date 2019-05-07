@@ -11,9 +11,9 @@
   - Escalable: puede aumentar y distribuir automáticamente réplicas de contenedor.
   - Apilable: puede apilar servicios verticalmente y sobre la marcha.
 
-* Un contenedor se lanza corriendo una imagen (paquete ejecutable que incluye todo lo necesario para ejecutar una aplicación).
+* Un contenedor se lanza corriendo una **imagen** (paquete ejecutable que incluye todo lo necesario para ejecutar una aplicación).
 
-*Un contenedor es una instancia de tiempo de ejecución de una imagen.
+* Un contenedor es una instancia de tiempo de ejecución de una imagen.
 
 
 ## Instalación
