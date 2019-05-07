@@ -17,7 +17,9 @@
 
 
 ## Instalación
-### Ubuntu
+
+### 1. Instalar Docker
+#### Ubuntu
 ```
 $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-
 key add -
@@ -27,7 +29,7 @@ $ sudo apt-get update
 $ sudo apt-get install docker-ce
 ```
 
-### CentOS
+#### CentOS
 ```
 $ sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 $ sudo yum install docker-ce
@@ -38,15 +40,25 @@ $ sudo curl -L https://github.com/docker/compose/releases/download/1.24.0-rc1/do
 $ sudo chmod +x /usr/local/bin/docker-compose
 ```
 
-### Windows 
+#### Windows 
 Tener en cuenta que Docker solo está disponible para Windows 10 64bit: Pro, Enterprise or Education.
 [Docker Desktop para Windows](https://docs.docker.com/docker-for-windows/install/)
 
-### MacOS
+#### MacOS
 [Docker Desktop para Mac](https://docs.docker.com/docker-for-mac/install/)
 
-### Verificar la versión de Docker
+### 2. Verificar la versión de Docker
 ```
 $ docker –version 
 ```
-
+### 3. Conocer más a fondo información sobre Docker.
+Contenedores pausados, contenedores corriendo actualmente, etc.
+```
+$ docker info
+```
+### 4. Probar que docker fue instalado correctamente.
+```
+$ docker run hello-world
+```
+Este comando debería arrojar el siguiente resultado.
+![](./docs/instalacion4.png)
