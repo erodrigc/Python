@@ -124,6 +124,33 @@ $ pip install -r requirements.txt
 $ python app.py
 ```
 Ir al browser y buscar http://0.0.0.0:3000/ .
+Deberían ver algo similar a la siguiente imagen.
+![](./docs/contenedores4.png)
+
+#### 5.	En este punto se tiene una aplicación funcional sin Docker.
+
+#### 6.	Crear el Dockerfile con el siguiente contenido, este archivo sirve para crear una imagen de la aplicación. 
+```Docker
+# Build an image starting with the Python 2.7
+FROM python:2.7-slim
+
+# Set the working directory to /app
+WORKDIR /app
+
+# Copy the current directory contents into the container at /app
+COPY . /app
+
+# Install any needed packages specified in requirements.txt
+RUN pip install --trusted-host pypi.python.org -r requirements.txt
+
+# Make port 3000 available to the world outside this container
+EXPOSE 3000
+
+# Define environment variable
+ENV NAME World
+
+# Run app.py when the container launches
+CMD python app.py
 
 
 
