@@ -151,8 +151,7 @@ ENV NAME World
 
 # Run app.py when the container launches
 CMD python app.py
+```
+Docker cuenta con diferentes instrucciones para componer el Dockerfile: ADD, COPY, ENV, EXPOSE, FROM, LABEL, STOPSIGNAL, USER, VOLUME y WORKDIR.
 
-
-
-
-
+#### 
