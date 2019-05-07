@@ -1,6 +1,20 @@
 # TutorialDocker
 
-Tutorial para la clase de Telemática de la Universidad EAFIT.
+## Conceptos de Docker
+* Docker es una plataforma para desarrollar, desplegar y correr aplicaciones con contenedores.
+
+* La contenedorización es popular ya que es:
+  - Flexible: incluso las aplicaciones mas complejas pueden ser contenidas en contenedores.
+  - Ligera: los contenedores aprovechan y comparten el núcleo de host.
+  - Intercambiable: puede implementar actualizaciones y actualizaciones sobre la marcha.
+  - Portátil: se puede compilar localmente, implementarlo en la nube y ejecutar en cualquier lugar.
+  - Escalable: puede aumentar y distribuir automáticamente réplicas de contenedor.
+  - Apilable: puede apilar servicios verticalmente y sobre la marcha.
+
+* Un contenedor se lanza corriendo una imagen (paquete ejecutable que incluye todo lo necesario para ejecutar una aplicación).
+
+*Un contenedor es una instancia de tiempo de ejecución de una imagen.
+
 
 ## Instalación
 ### Ubuntu
