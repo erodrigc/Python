@@ -184,3 +184,72 @@ $ docker run -d -p 3000:3000 nameApp
 ```
 $ docker container stop <id>
 ```
+#### 11. Para compartir la imagen, crear una cuenta en https://hub.docker.com si aun no la ha creado.
+
+#### 12.	Acceder a esta desde la terminal.
+```
+$ docker login
+```
+#### 13.	Ponerle un tag a la imagen.
+```
+$ docker tag <image> <username/repository:tag>
+```
+Un ejemplo de este comando es: 
+```
+$ docker tag friendlyhello cwhiter/get-started:part2
+```
+#### 14.	Verificar que la imagen creada con el tag anterior si exista.
+```
+$ docker image ls
+```
+#### 15.	Publicar la imagen.
+```
+$ docker push <username/repository:tag>
+```
+#### 16.	Correr la imagen desde cualquier lugar. 
+```
+$ docker run -p 3000:3000 <username/repository:tag>
+```
+Y desde cualquier browser accede a http://localhost:3000.
+#### Cheat Sheet
+![](./docs/compartirimagen8.png)
+
+## Servicios
+* Son contenedores en producción. 
+
+* Corre solamente una imagen.
+
+* Para esto, creamos un docker-compose, el cual define como los contenedores deberían comportarse en producción. 
+
+* A un contenedor solo corriendo en un servicio se le llama task. 
+
+#### 1.	Crear el docker-compose.yml con el siguiente contenido.	
+```
+version: "3"
+services:
+  web:
+    # replace username/repo:tag with your name and image details
+    image: username/repo:tag
+    restart: always
+    build: .
+    ports:
+      - "3000:3000"
+```
+Este archivo le dice a Docker que:
+  * Obtenga la imagen creada previamente.
+  * Reiniciar los contenedores siempre.
+  *	Mapear el puerto 80 al 80, el 443 al 443 y el 3000 al 3000. 
+
+#### 2.	Correr la aplicación.
+```
+$ docker-compose build
+$ docker-compose up
+```
+Para correr en detached mode
+```
+$ docker-compose up -d
+```
+#### 3.	Abrir la app en un browser.
+
+###### Referencias
+https://docs.docker.com/get-started/ 
