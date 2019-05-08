@@ -1,4 +1,8 @@
-# TutorialDocker
+# Tutorial Docker y AWS
+
+## Introducción
+
+## Objetivos
 
 ## Conceptos de Docker
 * Docker es una plataforma para desarrollar, desplegar y correr aplicaciones con contenedores.
@@ -18,8 +22,8 @@
 
 ## Instalación
 
-### 1. Instalar Docker
-#### Ubuntu
+#### 1. Instalar Docker
+##### Ubuntu
 ```
 $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-
 key add -
@@ -29,7 +33,7 @@ $ sudo apt-get update
 $ sudo apt-get install docker-ce
 ```
 
-#### CentOS
+##### CentOS
 ```
 $ sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 $ sudo yum install docker-ce
@@ -40,35 +44,35 @@ $ sudo curl -L https://github.com/docker/compose/releases/download/1.24.0-rc1/do
 $ sudo chmod +x /usr/local/bin/docker-compose
 ```
 
-#### Windows 
+##### Windows 
 Tener en cuenta que Docker solo está disponible para Windows 10 64bit: Pro, Enterprise or Education.
 [Docker Desktop para Windows](https://docs.docker.com/docker-for-windows/install/)
 
-#### MacOS
+##### MacOS
 [Docker Desktop para Mac](https://docs.docker.com/docker-for-mac/install/)
 
-### 2. Verificar la versión de Docker
+#### 2. Verificar la versión de Docker
 ```
 $ docker –version 
 ```
-### 3. Conocer más a fondo información sobre Docker.
+#### 3. Conocer más a fondo información sobre Docker.
 Contenedores pausados, contenedores corriendo actualmente, etc.
 ```
 $ docker info
 ```
-### 4. Probar que docker fue instalado correctamente.
+#### 4. Probar que docker fue instalado correctamente.
 ```
 $ docker run hello-world
 ```
 Este comando debería arrojar el siguiente resultado.
 ![](./docs/instalacion4.png)
 
-### 5. Listar las imágenes descargadas en el computador.
+#### 5. Listar las imágenes descargadas en el computador.
 ```
 $ docker image ls
 ```
 
-### 6. Listar los contenedores existentes corriendo actualmente.
+#### 6. Listar los contenedores existentes corriendo actualmente.
 ```
 $ docker container ls
 ```
@@ -77,7 +81,7 @@ Listar todos los contenedores existentes, incluso los que no están corriendo.
 $ docker container ls –all
 ```
 
-### Cheat Sheet
+#### Cheat Sheet
 ![](./docs/cheatsheetinstalacion.png)
 
 ## Contenedores
@@ -238,7 +242,7 @@ services:
 Este archivo le dice a Docker que:
   * Obtenga la imagen creada previamente.
   * Reiniciar los contenedores siempre.
-  *	Mapear el puerto 80 al 80, el 443 al 443 y el 3000 al 3000. 
+  *	Mapear el puerto 3000 al 3000. 
 
 #### 2.	Correr la aplicación.
 ```
@@ -250,6 +254,16 @@ Para correr en detached mode
 $ docker-compose up -d
 ```
 #### 3.	Abrir la app en un browser.
+
+## Desplegar en AWS
+
+#### 1.	Crear una cuenta en [AWS Educate](https://aws.amazon.com/education/awseducate/).
+
+#### 2.	Crear una maquina virtual EC2 y lanzarla. 
+
+#### 3.	Escoger el sistema operativo Amazon Linux 2 64-bit(x86), el cual funciona como un CentOS. 
+
+
 
 ###### Referencias
 https://docs.docker.com/get-started/ 
