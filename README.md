@@ -244,7 +244,7 @@ Este archivo le dice a Docker que:
   * Reiniciar los contenedores siempre.
   *	Mapear el puerto 3000 al 3000. 
 
-#### 2.	Correr la aplicación.
+#### 2. Correr la aplicación.
 ```
 $ docker-compose build
 $ docker-compose up
@@ -257,26 +257,170 @@ $ docker-compose up -d
 
 ## Desplegar en AWS
 
-#### 1.	Crear una cuenta en [AWS Educate](https://aws.amazon.com/education/awseducate/).
+#### 1. Crear una cuenta en [AWS Educate](https://aws.amazon.com/education/awseducate/).
 
 #### 2.	Crear una maquina virtual EC2 y lanzarla. 
 
 #### 3.	Escoger el sistema operativo Amazon Linux 2 64-bit(x86), el cual funciona como un CentOS. 
 ![](./docs/EscogerSO.png)
 
-#### 4.	Escoger el Free tier y presionar *Review and Launch*.
+#### 4. Escoger el Free tier y presionar *Review and Launch*.
 ![](./docs/FreeTier.png)
 Volver a presionar *Launch*. 
 
-#### 5.	Crear una nueva *key*, darle un nombre y descargarla. 
+#### 5. Crear una nueva *key*, darle un nombre y descargarla. 
 ![](./docs/key.png)
 Presionar *Launch Instance* una vez se haya descargado la *key*.
 
-#### 6.	Presionar la instancia para verificar en que estado se encuenta. 
+#### 6. Presionar la instancia para verificar en que estado se encuenta. 
 ![](./docs/instancia.png)
 Al ser una nueva máquina virtual, su estado es *pending* (amarillo) pero luego de unos segundos cambiará a *running* (verde). 
 
-#### 7.	Darle un nombre a la máquina virtual.
+#### 7. Darle un nombre a la máquina virtual.
+
+#### 8. Para verificar que puertos se tiene activos, se debe seleccionar la VM e ir a la opción de seguridad. 
+![](./docs/VerificarPuertos.png)
+Ir a *Inbound*, en esta opción se pueden evidenciar los puertos activos en el momento. Al ser VM nueva, solo tiene el puerto 22 activado el cual está destinado a la conexión SSH.
+
+#### 9. Añadir los puertos 80 (HTTP) y 443 (HTTPS).
+![](./docs/anadirPuertos.png)
+![](./docs/anadirpuertos2.png)
+![](./docs/anadirpuertos3.png)
+
+#### 10. Volver a la página principal donde se muestran todas las instancias existentes.
+
+#### 11. Seleccionar la instancia con la que se está trabajando actualmente, e ir a “Network & Security -> Elastic IPs”.
+![](./docs/11.png)
+
+#### 12. Seleccionar Allocate New Address -> Amazon pool -> allocate.
+![](./docs/allocate1.png)
+![](./docs/allocate2.png)
+
+#### 13. El paso anterior generará una dirección IP. Presionar *close* y esto abrirá una interfaz con las direcciones IP creadas.
+
+#### 14. Seleccionar la dirección IP asignada previamente, ir a Actions -> Associate Address.
+![](./docs/14.png)
+
+#### 15. Asociar la dirección IP con la instancia creada al inicio del tutorial.
+![](./docs/15.png)
+
+#### 16. La VM quedó configurada, ahora se procederá a la conexión.
+
+#### 17. Verificar si existe una carpeta *.ssh* en *home* y si no existe, crearla. 
+```
+$ mkdir .ssh
+$ cd .ssh
+```
+#### 18. Mover la key descargada en el numeral 5 a la carpeta *.shh*.
+
+#### 19. Darle permisos a la key.
+```
+$ chmod 400 key.pem
+```
+#### 20. Seleccionar la instancia, ir a Actions -> Connect. Y copiar el comando de conexión de SSH. 
+
+#### 21. Conectarse vía SSH con la VM (pegar el comando copiado en 20).
+```
+$ ssh -i "key.pem" ec2-user@ec2-52-22-190-33.compute-1.amazonaws.com
+```
+#### 22. Instalar Docker. 
+```
+$ sudo yum update -y
+$ sudo amazon-linux-extras install docker
+$ sudo service docker start
+$ systemctl status docker.service
+```
+Este comando anterior debería arrojar el siguiente resultado.
+![](./docs/22.png)
+Por ultimo, realizar los siguientes comandos.
+```
+$ sudo usermod -a -G docker ec2-user
+$ exit
+```
+#### 23. Volver a conectarse a la VM y verificar la versión de docker.
+```
+$ docker --version
+```
+#### 24. Instalar docker-compose.
+```
+$ sudo curl -L https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+$ sudo chmod +x /usr/local/bin/docker-compose
+$ docker-compose version
+```
+El ultimo comando debería arrojar algo similar a la siguiente imagen.
+![](./docs/24.png)
+
+#### 25. Desplegar la app con docker.
+Clonar el repositorio o escribir nuevamente app.py, requirements.txt, Dockerfile y docker-compose.yml.
+Para un funcionamiento correcto en AWS, crear un archivo **nginx.conf** con el siguiente contenido, este paso se realiza solo si no se clonó el repositorio. 
+```
+events {
+	  worker_connections  1024;  ## Default: 1024
+}
+http {
+	    server {
+	        listen 80;
+	        server_name localhost;
+	        
+	        location / {
+	            proxy_pass http://web:3000;
+	            proxy_http_version 1.1;
+	            proxy_set_header Upgrade $http_upgrade;
+	            proxy_set_header Connection 'upgrade';
+	            proxy_set_header Host $host;
+	            proxy_cache_bypass $http_upgrade;
+	    }
+ }
+ server {
+    listen 443;
+	  #server_name localhost;
+	  server_name ec2-18-205-156-28.compute-1.amazonaws.com;
+	  location / {
+	      proxy_pass http://web:3000;
+	      proxy_set_header Connection "";
+	      proxy_set_header Host $host;
+	      proxy_set_header X-Real-IP $remote_addr;
+	      proxy_set_header X-Forwarded-For $remote_addr;
+	   }
+  }
+}
+```
+Y añadir al docker-compose.yml las siguientes líneas, justo debajo de services:
+```
+nginx:
+	    container_name: nginx-server
+	    image: nginx
+	    volumes:
+	      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+	    ports:
+	      - "80:80"
+	      - "443:443"
+	    depends_on:
+	      - web
+```
+En este caso, NGINX funciona como proxy inverso. 
+Para desplegar la aplicación, correr los siguientes comandos: 
+```
+$ docker-compose build
+$ docker-compose up
+```
+
+#### 26. Acceder a la app por medio del dominio brindado por Amazon. 
+![](./docs/26.png)
+
+#### 27. Una vez verificado el funcionamiento con el dominio brindado, se procede a obtener un dominio propio.
+Ir a [freenom](freenom.com) para obtener un dominio gratis. 
+Escribir el nombre del dominio y buscar si está disponible.
+![](./docs/27.png)
+
+#### 28. Si está disponible, aparece una imagen similar. 
+![](./docs/28.png)
+
+#### 29. Escoger el dominio de su gusto y asignarle la dirección IP estática de la VM de amazon. 
+![](./docs/29.png)
+
+#### 30. En este punto, ya podrá acceder a su aplicación por medio del dominio.
+
 
 
 
