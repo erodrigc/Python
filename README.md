@@ -4,7 +4,7 @@
 
 ## Objetivos
 
-## Conceptos de Docker
+## Docker
 * Docker es una plataforma para desarrollar, desplegar y correr aplicaciones con contenedores.
 
 * La contenedorización es popular ya que es:
@@ -20,7 +20,7 @@
 * Un **contenedor** es una instancia de tiempo de ejecución de una imagen.
 
 
-## Instalación
+### Instalación
 
 #### 1. Instalar Docker
 ##### Ubuntu
@@ -84,7 +84,7 @@ $ docker container ls –all
 #### Cheat Sheet
 ![](./docs/cheatsheetinstalacion.png)
 
-## Contenedores
+### Contenedores
 * En el pasado, si comenzaba a escribir una aplicación de Python, su primera tarea era instalar un tiempo de ejecución de Python en su máquina. Con Docker, solo puede tomar un tiempo de ejecución Python portátil como una imagen, sin necesidad de instalación. Estas imágenes portátiles están definidas por algo llamado Dockerfile.
 
 * Un **Dockerfile** define lo que sucede en el ambiente dentro de su contenedor. 
@@ -218,7 +218,7 @@ Y desde cualquier browser accede a http://localhost:3000.
 #### Cheat Sheet
 ![](./docs/compartirimagen8.png)
 
-## Servicios
+### Servicios
 * Son contenedores en producción. 
 
 * Corre solamente una imagen.
@@ -262,6 +262,21 @@ $ docker-compose up -d
 #### 2.	Crear una maquina virtual EC2 y lanzarla. 
 
 #### 3.	Escoger el sistema operativo Amazon Linux 2 64-bit(x86), el cual funciona como un CentOS. 
+![](./docs/EscogerSO.png)
+
+#### 4.	Escoger el Free tier y presionar *Review and Launch*.
+![](./docs/FreeTier.png)
+Volver a presionar *Launch*. 
+
+#### 5.	Crear una nueva *key*, darle un nombre y descargarla. 
+![](./docs/key.png)
+Presionar *Launch Instance* una vez se haya descargado la *key*.
+
+#### 6.	Presionar la instancia para verificar en que estado se encuenta. 
+![](./docs/instancia.png)
+Al ser una nueva máquina virtual, su estado es *pending* (amarillo) pero luego de unos segundos cambiará a *running* (verde). 
+
+#### 7.	Darle un nombre a la máquina virtual.
 
 
 
