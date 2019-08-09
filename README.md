@@ -19,6 +19,13 @@
 
 * Un **contenedor** es una instancia de tiempo de ejecución de una imagen.
 
+* **Docker deamon** es un servicio que corre en el sistema operativo host.
+
+### Como se comunica el cliente con Docker.
+![](./docs/comm.png)
+* El cliente es donde se ejecutan diferentes comandos de Docker. Puede instalarse en Windows, Linux, MacOS. Configurado para conectarse al Docker host remoto.
+* El Docker host es el servidor que ejecuta el demonio Docker (se ejecuta en una máquina virtual que usa Linux).
+* El Registry es un lugar para encontrar y descargar imágenes de Docker. 
 
 ### Instalación
 
