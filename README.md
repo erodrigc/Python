@@ -5,7 +5,9 @@
 ## Objetivos
 
 ## Docker
-* Docker es una plataforma para desarrollar, desplegar y correr aplicaciones con contenedores.
+* Docker es una plataforma para desarrollar, desplegar y correr aplicaciones con contenedores. 
+
+* Permite crear una aplicación y empaquetarla junto con sus dependencias y librerías en un contenedor que será capaz de ejecutarse en cualquier otra máquina que disponga de una capa para la gestión de dichos contenedores.
 
 * La contenedorización es popular ya que es:
   - Flexible: incluso las aplicaciones mas complejas pueden ser contenidas en contenedores.
@@ -19,7 +21,9 @@
 
 * Un **contenedor** es una instancia de tiempo de ejecución de una imagen.
 
-* **Docker deamon** es un servicio que corre en el sistema operativo host.
+* **Docker Deamon** es un servicio que corre en el sistema operativo host.
+
+* **Dockerfile** es un documento que se utiliza para crear las imágenes de contenedor. Contiene toda la información de configuración y los comandos necesarios para ensamblar una imagen de contenedor. El encargado de convertir un dockerfile en un contenedor es, el Docker Daemon.
 
 ### Como se comunica el cliente con Docker.
 ![](./docs/comm.png)
